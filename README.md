@@ -1,10 +1,8 @@
+[![npm version](https://badge.fury.io/js/iwwa-formula-resolver.svg)](https://badge.fury.io/js/iwwa-formula-resolver)
 [![Build Status](https://travis-ci.org/innowatio/iwwa-formula-resolver.svg?branch=master)](https://travis-ci.org/innowatio/iwwa-formula-resolver)
-[![codecov.io](https://codecov.io/github/innowatio/iwwa-formula-resolver/coverage.svg?branch=master)](https://codecov.io/github/iwwa-formula-resolver?branch=master)
+[![codecov](https://codecov.io/gh/innowatio/iwwa-formula-resolver/branch/master/graph/badge.svg)](https://codecov.io/gh/innowatio/iwwa-formula-resolver)
 [![Dependency Status](https://david-dm.org/innowatio/iwwa-formula-resolver.svg)](https://david-dm.org/innowatio/iwwa-formula-resolver)
 [![devDependency Status](https://david-dm.org/innowatio/iwwa-formula-resolver/dev-status.svg)](https://david-dm.org/innowatio/iwwa-formula-resolver#info=devDependencies)
-
-
-# Iwwa-formula-resolver
 
 Utility lib for resolving virtual sensor's formulas.
 
@@ -19,11 +17,11 @@ npm install iwwa-formula-resolver --save
 ```js
 import {evaluateFormula} from "iwwa-formula-resolver";
 
-const result = evaluateFormula(formula, sensorsData);
+const result = evaluateFormula(formula, sensorsData, measurementDelta);
 ```
 
 #### formula
-##### object containing the formula to be resolved, data struct:
+Object containing the formula to be resolved, aka:
 ```js
 {
     formula: "(x+y+z)/2"
@@ -31,7 +29,7 @@ const result = evaluateFormula(formula, sensorsData);
 ```
 
 #### sensorsData
-##### an array containing all objects data to be evaluated within the formula
+An array containing all objects data to be evaluated within the formula, aka:
 ```js
 [{
     sensorId: "x",
@@ -39,3 +37,6 @@ const result = evaluateFormula(formula, sensorsData);
     measurementTimes: "1453939200000,1453939500000,1453939800000,1453940100000,1453940400000,1453940700000,1453941000000,1453941300000,1453941600000"
 }, ... ]
 ```
+
+#### measurementDelta
+Measurement sample delta (not mandatory, if not specified 300000)
