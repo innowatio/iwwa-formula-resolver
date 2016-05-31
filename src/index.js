@@ -5,10 +5,22 @@ import {parse} from "mathjs";
 
 export function evaluateFormula (virtualSensor, sensorsData, measurementDelta = 300000) {
 
-    const measurements = timestampFlatten(processSensorData(sensorsData, measurementDelta));
+    const cleanedSensors = sensorsData.reduce((prev, sensor) => {
+        return [...prev, {
+            ...sensor,
+            oldSensorId: sensor.sensorId,
+            sensorId: randomString(8)
+        }];
+    }, []);
+
+    const cleanedFormula = cleanedSensors.reduce((prev, sensor) => {
+        return prev.replace(sensor.oldSensorId, sensor.sensorId);
+    }, virtualSensor.formula);
+
+    const measurements = timestampFlatten(processSensorData(cleanedSensors, measurementDelta));
     const timestamps = uniq(measurements.map(x => x.measurementTime));
 
-    const parsedFormula = parse(virtualSensor.formula);
+    const parsedFormula = parse(cleanedFormula);
     const formula = parsedFormula.compile();
     
     const virtualMeasurements = timestamps.reduce((prev, timestamp) => {
@@ -19,6 +31,10 @@ export function evaluateFormula (virtualSensor, sensorsData, measurementDelta = 
                 return prev;
             }, {});
         try {
+            console.log({
+                formula: cleanedFormula,
+                var: filtered
+            });
             const result = formula.eval(filtered);
             return {
                 measurementValues: [...prev.measurementValues, result],
@@ -80,4 +96,14 @@ function normalizeTimestamps (timestamps, measurementDelta) {
     return timestamps.map(timestamp => {
         return timestamp - (timestamp % measurementDelta);
     });
+}
+
+function randomString (len) {
+    const charSet = "abcdefghijklmnopqrstuvwxyz";
+    var randomString = "";
+    for (var i = 0; i < len; i++) {
+        var randomPoz = Math.floor(Math.random() * charSet.length);
+        randomString += charSet.substring(randomPoz, randomPoz+1);
+    }
+    return randomString;
 }
