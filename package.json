@@ -8,20 +8,20 @@
     "url": "https://github.com/innowatio/iwwa-formula-resolver.git"
   },
   "dependencies": {
-    "babel-polyfill": "^6.9.0",
+    "babel-polyfill": "^6.9.1",
     "lodash.flattendeep": "^4.2.0",
     "lodash.uniq": "^4.3.0",
     "mathjs": "^3.2.1"
   },
   "devDependencies": {
     "babel-cli": "6.9.0",
-    "babel-core": "^6.9.0",
+    "babel-core": "^6.9.1",
     "babel-eslint": "^6.0.4",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-stage-0": "^6.5.0",
     "chai": "^3.5.0",
     "codecov": "^1.0.1",
-    "eslint": "^2.10.2",
+    "eslint": "^2.11.1",
     "isparta": "^4.0.0",
     "mocha": "^2.5.1",
     "rimraf": "^2.5.2"
