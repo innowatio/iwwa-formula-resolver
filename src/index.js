@@ -5,13 +5,16 @@ import {parse} from "mathjs";
 
 export function evaluateFormula (virtualSensor, sensorsData, measurementDelta = 300000) {
 
-    const cleanedSensors = sensorsData.reduce((prev, sensor) => {
-        return [...prev, {
-            ...sensor,
-            oldSensorId: sensor.sensorId,
-            sensorId: randomString(8)
-        }];
-    }, []);
+    const cleanedSensors = sensorsData
+        .sort((a, b) => b.sensorId.length - a.sensorId.length)
+        .reduce((prev, sensor) => {
+            console.log(sensor);
+            return [...prev, {
+                ...sensor,
+                oldSensorId: sensor.sensorId,
+                sensorId: randomString(8)
+            }];
+        }, []);
 
     const cleanedFormula = cleanedSensors.reduce((prev, sensor) => {
         return prev.replace(sensor.oldSensorId, sensor.sensorId);
