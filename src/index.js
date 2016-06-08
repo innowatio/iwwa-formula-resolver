@@ -17,7 +17,7 @@ export function evaluateFormula (virtualSensor, sensorsData, measurementDelta = 
         }, []);
 
     const cleanedFormula = cleanedSensors.reduce((prev, sensor) => {
-        return prev.replace(sensor.oldSensorId, sensor.sensorId);
+        return prev.replace(new RegExp(sensor.oldSensorId, 'g'), sensor.sensorId);
     }, virtualSensor.formula);
 
     const measurements = timestampFlatten(processSensorData(cleanedSensors, measurementDelta));
