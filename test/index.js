@@ -59,7 +59,7 @@ describe("`evaluateFormula` function", () => {
 });
 
 describe("`evaluateFormula` function", () => {
-    it("return the correct arrays of results with custom operators", async () => {
+    it("return the correct arrays of results with forward shift operator", async () => {
         const formula = {
             formula: "A_1D_FORWARD_SHIFT(sensor)"
         };
@@ -78,7 +78,7 @@ describe("`evaluateFormula` function", () => {
 });
 
 describe("`evaluateFormula` function", () => {
-    it("return the correct arrays of results with custom operators", async () => {
+    it("return the correct arrays of results with backward shift operator", async () => {
         const formula = {
             formula: "A_1D_BACKWARD_SHIFT(sensor)"
         };
@@ -97,7 +97,7 @@ describe("`evaluateFormula` function", () => {
 });
 
 describe("`evaluateFormula` function", () => {
-    it("return the correct arrays of results with custom operators", async () => {
+    it("return the correct arrays of results with mixed shift operators", async () => {
         const formula = {
             formula: "A_1D_FORWARD_SHIFT(sensor)+A_1D_BACKWARD_SHIFT(sensor)"
         };
@@ -108,6 +108,25 @@ describe("`evaluateFormula` function", () => {
         }];
         const expected = {
             measurementValues: "2,4,6,8,10,12,15,17,9",
+            measurementTimes: "1453939200000,1454025600000,1454112000000,1454198400000,1454284800000,1454371200000,1454457600000,1454544000000,1454630400000"
+        };
+        const result = await evaluateFormula(formula, sensorsData);
+        expect(result).to.deep.equal(expected);
+    });
+});
+
+describe("`evaluateFormula` function", () => {
+    it("return the correct arrays of results with totalizator operator", async () => {
+        const formula = {
+            formula: "TOTALIZATOR(sensor)"
+        };
+        const sensorsData = [{
+            sensorId: "sensor",
+                measurementValues: "1,2,3,4,5,6,7,9,10",
+            measurementTimes: "1453939200000,1454025600000,1454112000000,1454198400000,1454284800000,1454371200000,1454457600000,1454544000000,1454630400000"
+        }];
+        const expected = {
+            measurementValues: "1,1,1,1,1,1,1,2,1",
             measurementTimes: "1453939200000,1454025600000,1454112000000,1454198400000,1454284800000,1454371200000,1454457600000,1454544000000,1454630400000"
         };
         const result = await evaluateFormula(formula, sensorsData);

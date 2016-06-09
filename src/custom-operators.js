@@ -21,12 +21,18 @@ function shiftTime (measurements, valTime, val, timeShifter) {
     return shiftedMeasurement ? shiftedMeasurement.measurementValue : 0;
 }
 
+function totalizator(measurements, valTime, val) {
+    let valIndex = R.findIndex(R.propEq("measurementTime", valTime))(measurements);
+    let prevVal = measurements[valIndex - 1] ? measurements[valIndex - 1].measurementValue : 0;
+    return val - prevVal;
+}
 
 // TODO find a better way to import functions only the first time
 let loaded = false;
 export function loadCustomOperators () {
     if (!loaded) {
         let operators = {};
+        operators[TOTALIZATOR] =              totalizator;
         operators[A_1Y_FORWARD_SHIFT] =       R.partialRight(shiftTime, [1000 * 60 * 60 * 24 * 365]);
         operators[A_1M_FORWARD_SHIFT] =       R.partialRight(shiftTime, [1000 * 60 * 60 * 24 * 30]);
         operators[A_1W_FORWARD_SHIFT] =       R.partialRight(shiftTime, [1000 * 60 * 60 * 24 * 7]);

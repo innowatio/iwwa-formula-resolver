@@ -3,7 +3,11 @@ import uniq from "lodash.uniq";
 
 import {parse} from "mathjs";
 
-import {loadCustomOperators, SHIFT_OPERATOR_SUFFIX} from "custom-operators";
+import {
+    loadCustomOperators,
+    SHIFT_OPERATOR_SUFFIX,
+    TOTALIZATOR
+} from "custom-operators";
 
 export function evaluateFormula (virtualSensor, sensorsData, measurementDelta = 300000) {
     loadCustomOperators();
@@ -22,6 +26,7 @@ export function evaluateFormula (virtualSensor, sensorsData, measurementDelta = 
     const cleanedFormula = cleanedSensors.reduce((prev, sensor) => {
         return prev
             .replace(new RegExp(SHIFT_OPERATOR_SUFFIX + "\\(", "g"), SHIFT_OPERATOR_SUFFIX + "(measurements,valTime,")
+            .replace(new RegExp(TOTALIZATOR + "\\(", "g"), TOTALIZATOR + "(measurements,valTime,")
             .replace(new RegExp(sensor.oldSensorId, "g"), sensor.sensorId)
             .replace(new RegExp("measurements,valTime,"+sensor.sensorId, "g"),
                 sensor.sensorId + "_measurements," + sensor.sensorId + "_valTime," + sensor.sensorId);
