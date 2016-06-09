@@ -3,8 +3,11 @@ import uniq from "lodash.uniq";
 
 import {parse} from "mathjs";
 
-export function evaluateFormula (virtualSensor, sensorsData, measurementDelta = 300000) {
+import {loadCustomOperators, SHIFT_OPERATOR_SUFFIX} from "custom-operators";
 
+export function evaluateFormula (virtualSensor, sensorsData, measurementDelta = 300000) {
+    loadCustomOperators();
+    
     const cleanedSensors = sensorsData
         .sort((a, b) => b.sensorId.length - a.sensorId.length)
         .reduce((prev, sensor) => {
@@ -17,7 +20,11 @@ export function evaluateFormula (virtualSensor, sensorsData, measurementDelta = 
         }, []);
 
     const cleanedFormula = cleanedSensors.reduce((prev, sensor) => {
-        return prev.replace(new RegExp(sensor.oldSensorId, "g"), sensor.sensorId);
+        return prev
+            .replace(new RegExp(SHIFT_OPERATOR_SUFFIX + "\\(", "g"), SHIFT_OPERATOR_SUFFIX + "(measurements,valTime,")
+            .replace(new RegExp(sensor.oldSensorId, "g"), sensor.sensorId)
+            .replace(new RegExp("measurements,valTime,"+sensor.sensorId, "g"),
+                sensor.sensorId + "_measurements," + sensor.sensorId + "_valTime," + sensor.sensorId);
     }, virtualSensor.formula);
 
     const measurements = timestampFlatten(processSensorData(cleanedSensors, measurementDelta));
@@ -31,6 +38,10 @@ export function evaluateFormula (virtualSensor, sensorsData, measurementDelta = 
             .filter(x => x.measurementTime === timestamp)
             .reduce((prev, current) => {
                 prev[current.sensorId] = current.measurementValue;
+                if (cleanedFormula.indexOf("_measurements") > 0) {
+                    prev[current.sensorId + "_measurements"] = measurements;
+                    prev[current.sensorId + "_valTime"] = timestamp;
+                }
                 return prev;
             }, {});
         try {
@@ -45,6 +56,7 @@ export function evaluateFormula (virtualSensor, sensorsData, measurementDelta = 
             };
         } catch (error) {
             console.log("Error while parsing formula, skipping measurement");
+            console.log(error);
         }
         return {
             measurementValues: [...prev.measurementValues],

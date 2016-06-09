@@ -11,7 +11,8 @@
     "babel-polyfill": "^6.9.1",
     "lodash.flattendeep": "^4.2.0",
     "lodash.uniq": "^4.3.0",
-    "mathjs": "^3.2.1"
+    "mathjs": "^3.2.1",
+    "ramda": "^0.21.0"
   },
   "devDependencies": {
     "babel-cli": "6.9.0",
