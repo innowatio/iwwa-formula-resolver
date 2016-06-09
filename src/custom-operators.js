@@ -21,7 +21,7 @@ function shiftTime (measurements, valTime, val, timeShifter) {
     return shiftedMeasurement ? shiftedMeasurement.measurementValue : 0;
 }
 
-function totalizator(measurements, valTime, val) {
+function totalizator (measurements, valTime, val) {
     let valIndex = R.findIndex(R.propEq("measurementTime", valTime))(measurements);
     let prevVal = measurements[valIndex - 1] ? measurements[valIndex - 1].measurementValue : 0;
     return val - prevVal;

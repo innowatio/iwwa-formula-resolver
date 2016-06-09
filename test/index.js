@@ -122,7 +122,7 @@ describe("`evaluateFormula` function", () => {
         };
         const sensorsData = [{
             sensorId: "sensor",
-                measurementValues: "1,2,3,4,5,6,7,9,10",
+            measurementValues: "1,2,3,4,5,6,7,9,10",
             measurementTimes: "1453939200000,1454025600000,1454112000000,1454198400000,1454284800000,1454371200000,1454457600000,1454544000000,1454630400000"
         }];
         const expected = {
