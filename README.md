@@ -40,3 +40,20 @@ An array containing all objects data to be evaluated within the formula, aka:
 
 #### measurementDelta
 Measurement sample delta (not mandatory, if not specified 300000)
+
+
+## Custom operators
+Following custom operators are provided:
+- totalizator: returns the difference with the previous available value
+- time shift: returns the value in the moment specified by the shifter
+
+#### usage
+```js
+import {
+    A_1D_FORWARD_SHIFT,
+    TOTALIZATOR
+} from "iwwa-formula-resolver";
+
+const formula = TOTALIZATOR + "(sensorX)*" + A_1D_FORWARD_SHIFT + "(sensorY)";
+const result = evaluateFormula(formula, sensorsData, measurementDelta);
+```

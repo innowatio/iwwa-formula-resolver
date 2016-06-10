@@ -61,7 +61,7 @@ describe("`evaluateFormula` function", () => {
 describe("`evaluateFormula` function", () => {
     it("return the correct arrays of results with forward shift operator", async () => {
         const formula = {
-            formula: "A_1D_FORWARD_SHIFT(sensor)"
+            formula: "a1dForwardShift(sensor)"
         };
         const sensorsData = [{
             sensorId: "sensor",
@@ -80,7 +80,7 @@ describe("`evaluateFormula` function", () => {
 describe("`evaluateFormula` function", () => {
     it("return the correct arrays of results with backward shift operator", async () => {
         const formula = {
-            formula: "A_1D_BACKWARD_SHIFT(sensor)"
+            formula: "a1dBackwardShift(sensor)"
         };
         const sensorsData = [{
             sensorId: "sensor",
@@ -99,7 +99,7 @@ describe("`evaluateFormula` function", () => {
 describe("`evaluateFormula` function", () => {
     it("return the correct arrays of results with mixed shift operators", async () => {
         const formula = {
-            formula: "A_1D_FORWARD_SHIFT(sensor)+A_1D_BACKWARD_SHIFT(sensor)"
+            formula: "a1dForwardShift(sensor)+a1dBackwardShift(sensor)"
         };
         const sensorsData = [{
             sensorId: "sensor",
@@ -118,7 +118,7 @@ describe("`evaluateFormula` function", () => {
 describe("`evaluateFormula` function", () => {
     it("return the correct arrays of results with totalizator operator", async () => {
         const formula = {
-            formula: "TOTALIZATOR(sensor)"
+            formula: "totalizator(sensor)"
         };
         const sensorsData = [{
             sensorId: "sensor",

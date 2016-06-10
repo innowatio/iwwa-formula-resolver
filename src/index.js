@@ -6,8 +6,32 @@ import {parse} from "mathjs";
 import {
     loadCustomOperators,
     SHIFT_OPERATOR_SUFFIX,
+    A_1Y_FORWARD_SHIFT,
+    A_1M_FORWARD_SHIFT,
+    A_1W_FORWARD_SHIFT,
+    A_1D_FORWARD_SHIFT,
+    A_15MIN_FORWARD_SHIFT,
+    A_1Y_BACKWARD_SHIFT,
+    A_1M_BACKWARD_SHIFT,
+    A_1W_BACKWARD_SHIFT,
+    A_1D_BACKWARD_SHIFT,
+    A_15MIN_BACKWARD_SHIFT,
     TOTALIZATOR
 } from "custom-operators";
+
+export {
+    A_1Y_FORWARD_SHIFT,
+    A_1M_FORWARD_SHIFT,
+    A_1W_FORWARD_SHIFT,
+    A_1D_FORWARD_SHIFT,
+    A_15MIN_FORWARD_SHIFT,
+    A_1Y_BACKWARD_SHIFT,
+    A_1M_BACKWARD_SHIFT,
+    A_1W_BACKWARD_SHIFT,
+    A_1D_BACKWARD_SHIFT,
+    A_15MIN_BACKWARD_SHIFT,
+    TOTALIZATOR
+};
 
 export function evaluateFormula (virtualSensor, sensorsData, measurementDelta = 300000) {
     loadCustomOperators();

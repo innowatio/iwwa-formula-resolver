@@ -1,19 +1,19 @@
 import math from "mathjs";
 import R from "ramda";
 
-export const TOTALIZATOR = "TOTALIZATOR";
-export const A_1Y_FORWARD_SHIFT = "A_1Y_FORWARD_SHIFT";
-export const A_1M_FORWARD_SHIFT = "A_1M_FORWARD_SHIFT";
-export const A_1W_FORWARD_SHIFT = "A_1W_FORWARD_SHIFT";
-export const A_1D_FORWARD_SHIFT = "A_1D_FORWARD_SHIFT";
-export const A_15MIN_FORWARD_SHIFT = "A_15MIN_FORWARD_SHIFT";
-export const A_1Y_BACKWARD_SHIFT = "A_1Y_BACKWARD_SHIFT";
-export const A_1M_BACKWARD_SHIFT = "A_1M_BACKWARD_SHIFT";
-export const A_1W_BACKWARD_SHIFT = "A_1W_BACKWARD_SHIFT";
-export const A_1D_BACKWARD_SHIFT = "A_1D_BACKWARD_SHIFT";
-export const A_15MIN_BACKWARD_SHIFT = "A_15MIN_BACKWARD_SHIFT";
+export const TOTALIZATOR = "totalizator";
+export const A_1Y_FORWARD_SHIFT = "a1yForwardShift";
+export const A_1M_FORWARD_SHIFT = "a1mForwardShift";
+export const A_1W_FORWARD_SHIFT = "a1wForwardShift";
+export const A_1D_FORWARD_SHIFT = "a1dForwardShift";
+export const A_15MIN_FORWARD_SHIFT = "a15minForwardShift";
+export const A_1Y_BACKWARD_SHIFT = "a1yBackwardShift";
+export const A_1M_BACKWARD_SHIFT = "a1mBackwardShift";
+export const A_1W_BACKWARD_SHIFT = "a1wBackwardShift";
+export const A_1D_BACKWARD_SHIFT = "a1dBackwardShift";
+export const A_15MIN_BACKWARD_SHIFT = "a15minBackwardShift";
 
-export const SHIFT_OPERATOR_SUFFIX = "WARD_SHIFT";
+export const SHIFT_OPERATOR_SUFFIX = "wardShift";
 
 function shiftTime (measurements, valTime, val, timeShifter) {
     let shiftedTime = valTime + timeShifter;
@@ -27,7 +27,6 @@ function totalizator (measurements, valTime, val) {
     return val - prevVal;
 }
 
-// TODO find a better way to import functions only the first time
 let loaded = false;
 export function loadCustomOperators () {
     if (!loaded) {
@@ -43,7 +42,6 @@ export function loadCustomOperators () {
         operators[A_1W_BACKWARD_SHIFT] =      R.partialRight(shiftTime, [-(1000 * 60 * 60 * 24 * 7)]);
         operators[A_1D_BACKWARD_SHIFT] =      R.partialRight(shiftTime, [-(1000 * 60 * 60 * 24)]);
         operators[A_15MIN_BACKWARD_SHIFT] =   R.partialRight(shiftTime, [-(1000 * 60 * 15)]);
-        console.log(operators);
         math.import(operators);
         loaded = true;
     }
