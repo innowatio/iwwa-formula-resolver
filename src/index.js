@@ -124,10 +124,10 @@ function decomposeParsedFormula (node, items) {
         items.push(")");
     }
     if (node.isSymbolNode) {
-        items.push(node.name)
+        items.push(node.name);
     }
     if (node.isConstantNode) {
-        items.push(node.value)
+        items.push(node.value);
     }
 }
 
