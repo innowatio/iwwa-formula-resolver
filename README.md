@@ -20,7 +20,7 @@ import {evaluateFormula} from "iwwa-formula-resolver";
 const result = evaluateFormula(formula, sensorsData, measurementDelta);
 ```
 
-#### formula
+###### formula
 Object containing the formula to be resolved, aka:
 ```js
 {
@@ -28,7 +28,7 @@ Object containing the formula to be resolved, aka:
 }
 ```
 
-#### sensorsData
+###### sensorsData
 An array containing all objects data to be evaluated within the formula, aka:
 ```js
 [{
@@ -38,9 +38,34 @@ An array containing all objects data to be evaluated within the formula, aka:
 }, ... ]
 ```
 
-#### measurementDelta
+###### measurementDelta
 Measurement sample delta (not mandatory, if not specified 300000)
 
+### decomposeFormula
+
+```js
+import {decomposeFormula} from "iwwa-formula-resolver";
+
+const result = decomposeFormula(formula, sensorsData, measurementDelta);
+```
+
+###### formula
+Object containing the formula to be decomposed, aka:
+```js
+{
+    formula: "(x-y-z)^3.2*x/totalizator(y)"
+}
+```
+
+###### sensorsData
+An array containing all objects id to be decomposed within the formula, aka:
+```js
+[{
+    sensorId: "x"
+}, {
+    sensorId: "y"
+}, ... ]
+```
 
 ## Custom operators
 Following custom operators are provided:
