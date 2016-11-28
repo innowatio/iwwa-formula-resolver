@@ -61,10 +61,6 @@ export function evaluateFormula (virtualSensor, sensorsData, measurementDelta = 
                 return prev;
             }, {});
         try {
-            console.log({
-                formula: cleanedFormula,
-                var: filtered
-            });
             const result = formula.eval(filtered);
             return {
                 measurementValues: [...prev.measurementValues, result],
@@ -135,7 +131,6 @@ function getCleanedSensors (sensorsData) {
     return sensorsData
         .sort((a, b) => b.sensorId.length - a.sensorId.length)
         .reduce((prev, sensor) => {
-            console.log(sensor);
             return [...prev, {
                 ...sensor,
                 oldSensorId: sensor.sensorId,
