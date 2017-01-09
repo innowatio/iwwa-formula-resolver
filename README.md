@@ -32,7 +32,7 @@ Object containing the formula to be resolved, aka:
 An array containing all objects data to be evaluated within the formula, aka:
 ```js
 [{
-    sensorId: "x",
+    symbol: "x",
     measurementValues: "1,2,3,4,5,6,7,9,10",
     measurementTimes: "1453939200000,1453939500000,1453939800000,1453940100000,1453940400000,1453940700000,1453941000000,1453941300000,1453941600000"
 }, ... ]
@@ -61,9 +61,9 @@ Object containing the formula to be decomposed, aka:
 An array containing all objects id to be decomposed within the formula, aka:
 ```js
 [{
-    sensorId: "x"
+    symbol: "x"
 }, {
-    sensorId: "y"
+    symbol: "y"
 }, ... ]
 ```
 

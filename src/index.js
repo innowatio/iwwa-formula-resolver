@@ -129,11 +129,11 @@ function decomposeParsedFormula (node, items) {
 
 function getCleanedSensors (sensorsData) {
     return sensorsData
-        .sort((a, b) => b.sensorId.length - a.sensorId.length)
+        .sort((a, b) => b.symbol.length - a.symbol.length)
         .reduce((prev, sensor) => {
             return [...prev, {
                 ...sensor,
-                oldSensorId: sensor.sensorId,
+                oldSensorId: sensor.symbol,
                 sensorId: randomString(8)
             }];
         }, []);
